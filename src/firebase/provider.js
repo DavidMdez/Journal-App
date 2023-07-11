@@ -73,3 +73,7 @@ export const singWithEmailPassword = async ({ email, password }) => {
     }
   }
 }
+
+export const logoutFirabase = async () => {
+  return await FirebaseAuth.signOut();
+}
