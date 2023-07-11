@@ -1,12 +1,5 @@
-import { registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/provider";
+import { singWithEmailPassword, registerUserWithEmailPassword, singInWithGoogle } from "../../firebase/provider";
 import { checkingCredentials, login, logout } from "./"
-
-export const checkingAuthentication = ( email, password ) => {
-  return async ( dispatch ) => {
-
-    dispatch( checkingCredentials() );
-  }
-}
 
 export const startGoogleSingIn = () => {
   return async ( dispatch ) => {
@@ -27,6 +20,17 @@ export const startCreateUserWithEmailPassword = ({ email, password, displayName 
 
     const { ok, uid, photoURL, errorMessage } = await registerUserWithEmailPassword({ email, password, displayName });
 
+    if ( !ok ) return dispatch( logout({ errorMessage }) );
+
+    dispatch( login({ uid, displayName, email, photoURL }) );
+  }
+}
+
+export const startLoginWithEmailPassword = ({ email, password }) => {
+  return async ( dispatch ) => {
+    dispatch( checkingCredentials() );
+
+    const { ok, uid, displayName, photoURL, errorMessage } = await singWithEmailPassword({ email, password });
     if ( !ok ) return dispatch( logout({ errorMessage }) );
 
     dispatch( login({ uid, displayName, email, photoURL }) );
