@@ -9,7 +9,6 @@ import { ImagesGallery } from "../components"
 import { useForm } from "../../hooks/useForm";
 import { setActiveNote, startSaveNote, startUploadingFile } from "../../store/journal";
 
-
 export const NoteView = () => {
   const dispatch = useDispatch();
   const fileInputRef = useRef();
@@ -113,7 +112,7 @@ export const NoteView = () => {
         />
       </Grid>
 
-      <ImagesGallery />
+      <ImagesGallery images={ note.imageUrls } />
       
     </Grid>
   )
