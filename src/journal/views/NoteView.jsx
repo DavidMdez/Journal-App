@@ -1,9 +1,49 @@
-import { SaveOutlined } from "@mui/icons-material"
+import { useEffect, useMemo, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography } from "@mui/material"
+import Swal from "sweetalert2";
+import 'sweetalert2/dist/sweetalert2.css'
+
 import { ImagesGallery } from "../components"
+import { useForm } from "../../hooks/useForm";
+import { setActiveNote, startSaveNote } from "../../store/journal";
 
 
 export const NoteView = () => {
+  const dispatch = useDispatch();
+  const fileInputRef = useRef();
+
+  const { active:note, messageSaved, isSaving } = useSelector( state => state.journal );
+
+  const { body, title, date, onInputChange, formState } = useForm( note );
+
+  const dateString = useMemo(() => {
+    const newDate = new Date( date );
+
+    return newDate.toUTCString();
+  }, [date]);
+
+  useEffect(() => {
+    dispatch( setActiveNote( formState ) );
+  }, [formState])
+
+  useEffect(() => {
+    if ( messageSaved.length > 0 ){
+      Swal.fire('Nota actualizada', messageSaved, 'success');
+    }
+  }, [messageSaved])
+
+  const onSaveNote = () => {
+    dispatch( startSaveNote() );
+  }
+
+  const onFileInputChange = ({ target }) => {
+    if ( target.files.length === 0 ) return;
+
+    console.log('subiendo')
+  }
+
   return (
     <Grid 
       container direction="row" 
@@ -14,12 +54,33 @@ export const NoteView = () => {
     >
       <Grid item>
         <Typography fontSize={ 39 } fontWeight="light">
-          28 de agosto, 2023
+          { dateString }
         </Typography>
       </Grid>
 
       <Grid item>
-        <Button color="primary" sx={{ padding: 2 }}>
+        <input 
+          type="file"
+          multiple
+          ref={ fileInputRef }
+          onChange={ onFileInputChange }
+          style={{ display: 'none' }}
+        />
+
+        <Button
+          color="primary"
+          disabled={ isSaving }
+          onClick={ () => fileInputRef.current.click() }
+        >
+          <UploadOutlined sx={{ fontSize: 30, mr: 1 }} />
+          Subir
+        </Button>
+
+        <Button
+          disabled={ isSaving }
+          onClick={ onSaveNote }
+          color="primary" 
+          sx={{ padding: 2 }}>
           <SaveOutlined sx={{ fontSize: 30, mr: 1 }} />
           Guardar
         </Button>
@@ -32,6 +93,9 @@ export const NoteView = () => {
           fullWidth
           placeholder="Ingrese un titulo"
           label="Titulo"
+          name='title'
+          value={ title }
+          onChange={ onInputChange }
           sx={{ border: 'none', mb: 1 }}
         />
 
@@ -43,6 +107,9 @@ export const NoteView = () => {
           placeholder="Que sucedio en el dia de hoy?"
           sx={{ border: 'none', mb: 1 }}
           minRows={ 5 }
+          name='body'
+          value={ body }
+          onChange={ onInputChange }
         />
       </Grid>
 
