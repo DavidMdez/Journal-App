@@ -5,7 +5,7 @@ import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui
 
 import { setActiveNote } from "../../store/journal";
 
-export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
+export const SideBarItem = ({ title = '', body, id, date, imageUrls = [], setViewSide }) => {
 
   const newTitle = useMemo(() => {
     return title.length > 17
@@ -17,6 +17,7 @@ export const SideBarItem = ({ title = '', body, id, date, imageUrls = [] }) => {
 
   const onActiveNote = () => {
     dispath( setActiveNote({ title, body, id, date, imageUrls }) );
+    setViewSide( false );
   }
 
   return (

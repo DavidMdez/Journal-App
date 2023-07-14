@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SaveOutlined, UploadOutlined } from "@mui/icons-material"
+import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material"
 import { Button, Grid, TextField, Typography } from "@mui/material"
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css'
 
 import { ImagesGallery } from "../components"
 import { useForm } from "../../hooks/useForm";
-import { setActiveNote, startSaveNote, startUploadingFile } from "../../store/journal";
+import { setActiveNote, startDeletingNote, startSaveNote, startUploadingFile } from "../../store/journal";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -41,6 +41,28 @@ export const NoteView = () => {
     if ( target.files.length === 0 ) return;
 
     dispatch( startUploadingFile( target.files ) );
+  }
+
+  const onDelete = () => {
+    Swal.fire({
+      title: 'Estás seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch( startDeletingNote() );
+        Swal.fire(
+          'Nota Eliminada!',
+          'La nota ha sido eliminada correctamente.',
+          'success'
+        )
+      }
+    })
   }
 
   return (
@@ -110,6 +132,17 @@ export const NoteView = () => {
           value={ body }
           onChange={ onInputChange }
         />
+      </Grid>
+
+      <Grid container justifyContent='end' >
+        <Button
+          onClick={ onDelete }
+          sx={{ mt: 2 }}
+          color="error"
+        >
+          <DeleteOutline />
+          Eliminar Nota
+        </Button>
       </Grid>
 
       <ImagesGallery images={ note.imageUrls } />
