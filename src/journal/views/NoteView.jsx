@@ -8,6 +8,7 @@ import 'sweetalert2/dist/sweetalert2.css'
 import { ImagesGallery } from "../components"
 import { useForm } from "../../hooks/useForm";
 import { setActiveNote, startDeletingNote, startSaveNote, startUploadingFile } from "../../store/journal";
+import { dateFormat } from "../../helpers";
 
 export const NoteView = () => {
   const dispatch = useDispatch();
@@ -18,9 +19,7 @@ export const NoteView = () => {
   const { body, title, date, onInputChange, formState } = useForm( note );
 
   const dateString = useMemo(() => {
-    const newDate = new Date( date );
-
-    return newDate.toUTCString();
+    return dateFormat( new Date(date) );
   }, [date]);
 
   useEffect(() => {

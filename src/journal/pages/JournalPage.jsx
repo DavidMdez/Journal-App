@@ -30,6 +30,7 @@ export const JournalPage = () => {
           disabled={ isSaving }
           onClick={ onClickNewNote }
           size="large"
+          aria-label="nueva nota"
           sx={{
             color: 'white',
             backgroundColor: 'error.main',

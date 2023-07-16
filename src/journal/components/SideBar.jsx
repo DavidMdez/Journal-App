@@ -3,20 +3,28 @@ import { useSelector } from "react-redux"
 import { SideBarItem } from "./SideBarItem";
 import React from "react";
 
-const ViewListSide = ({ drawerWidth, displayName, notes = [], setViewSide }) => {
+const ViewListSide = ({ drawerWidth, displayName, notes = [], setViewSide, photoURL }) => {
   return (
     <>
-     <Toolbar
+      <Toolbar
       sx={{
         width: drawerWidth,
         overflow: 'none',
-        padding: 0
+        padding: 0,
       }}
     >
-      <Typography variant="h6" noWrap component="div" >
-        { displayName }
+      <Typography variant="h6" noWrap component="div" style={{ display: 'flex', alignItems: 'center', gap: '10px'}} sx={{ marginLeft: { sm: '0px', xs: '16px'  } }} >
+        { photoURL &&
+          <img
+            src={ photoURL } 
+            alt="Foto"
+            style={{ borderRadius: '50%', width: '40px', height: '40px' }}
+          />
+        }
+        <span className="truncateLine">{ displayName }</span>
       </Typography>
     </Toolbar>
+
     <Divider />
       <List
         sx={{
@@ -39,7 +47,7 @@ const ViewListSide = ({ drawerWidth, displayName, notes = [], setViewSide }) => 
 
 export const SideBar = ({ drawerWidth = 280, viewSide, setViewSide }) => {
   
-  const { displayName } = useSelector( state => state.auth );
+  const { displayName, photoURL } = useSelector( state => state.auth );
   const { notes } = useSelector( state => state.journal );
 
   return (
@@ -50,9 +58,9 @@ export const SideBar = ({ drawerWidth = 280, viewSide, setViewSide }) => {
       <Drawer
         open={ viewSide }
         onClose={ () => setViewSide(false) }
-        sx={{ display: { sm: 'none' }  }}
+        sx={{ display: { sm: 'none' } }}
       >
-        <ViewListSide drawerWidth={ drawerWidth } displayName={ displayName } notes={ notes } setViewSide={ setViewSide } />
+        <ViewListSide drawerWidth={ drawerWidth } displayName={ displayName } notes={ notes } setViewSide={ setViewSide } photoURL={ photoURL } />
       </Drawer>
 
       <Drawer
@@ -60,7 +68,7 @@ export const SideBar = ({ drawerWidth = 280, viewSide, setViewSide }) => {
         open
         sx={{ display: { sm: 'flex', xs: 'none' }  }}
       > 
-        <ViewListSide drawerWidth={ drawerWidth } displayName={ displayName } notes={ notes } setViewSide={ setViewSide } />
+        <ViewListSide drawerWidth={ drawerWidth } displayName={ displayName } notes={ notes } setViewSide={ setViewSide } photoURL={ photoURL } />
       </Drawer>
     </Box>
   )

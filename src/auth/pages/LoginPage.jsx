@@ -24,7 +24,7 @@ export const LoginPage = () => {
 
   const onSubmit = ( event ) => {
     event.preventDefault();
-    dispatch( startLoginWithEmailPassword(formState) );
+    dispatch( startLoginWithEmailPassword( formState ) );
   }
 
   const onGoogleSingIn = () => {

@@ -34,6 +34,7 @@ export const NavBar = ({ drawerWidth = 280, setViewSide }) => {
           <IconButton
             color="error"
             onClick={ onLogout }
+            aria-label="salir"
           >
             <LogoutOutlined />
           </IconButton>
