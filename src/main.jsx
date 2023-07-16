@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, HashRouter } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
 import { JournalApp } from './JournalApp'
@@ -10,9 +10,9 @@ import './styless.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={ store } >
-      <BrowserRouter>
+      <HashRouter>
         <JournalApp />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </React.StrictMode>,
 )
