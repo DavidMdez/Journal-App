@@ -1,7 +1,9 @@
 export const fileUpload = async( file ) => {
-  if ( !file ) throw new Error('File no exist');
+  // if ( !file ) throw new Error('File no exist');
+  if ( !file ) return null
 
-  const clodName = import.meta.env.VITE_CLOUD_NAME;
+  // const clodName = import.meta.env.VITE_CLOUD_NAME;
+  const clodName = 'dmadnkwsi';
   const cloudUrl = `https://api.cloudinary.com/v1_1/${ clodName }/upload`
 
   const formData = new FormData();
@@ -22,6 +24,7 @@ export const fileUpload = async( file ) => {
     return cloudResp.secure_url;
     
   } catch (error) {
-    throw new Error( error.message );
+    // throw new Error( error.message );
+    return null;
   }
 }
