@@ -1,9 +1,12 @@
+import { getEnvironments } from "./getEnvironments";
+
 export const fileUpload = async( file ) => {
   // if ( !file ) throw new Error('File no exist');
   if ( !file ) return null
 
-  // const clodName = import.meta.env.VITE_CLOUD_NAME;
-  const clodName = 'dmadnkwsi';
+  const env = getEnvironments();
+  const clodName = env.VITE_CLOUD_NAME;
+  
   const cloudUrl = `https://api.cloudinary.com/v1_1/${ clodName }/upload`
 
   const formData = new FormData();
