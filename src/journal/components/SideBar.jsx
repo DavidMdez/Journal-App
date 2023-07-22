@@ -1,4 +1,10 @@
-import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material"
+import Box from "@mui/material/Box"
+import Divider from "@mui/material/Divider"
+import Drawer from "@mui/material/Drawer"
+import List from "@mui/material/List"
+import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+
 import { useSelector } from "react-redux"
 import { SideBarItem } from "./SideBarItem";
 import React from "react";

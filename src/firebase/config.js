@@ -4,7 +4,6 @@ import { getFirestore } from 'firebase/firestore/lite';
 import { getEnvironments } from "../helpers";
 
 const env = getEnvironments();
-console.log( env );
 
 const firebaseConfig = {
   apiKey: env.VITE_API_KEY,

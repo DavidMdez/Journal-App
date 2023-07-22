@@ -1,7 +1,14 @@
 import { useEffect, useMemo, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOutline, SaveOutlined, UploadOutlined } from "@mui/icons-material"
-import { Button, Grid, TextField, Typography } from "@mui/material"
+
+import DeleteOutline from "@mui/icons-material/DeleteOutline";
+import SaveOutlined from "@mui/icons-material/SaveOutlined";
+import UploadOutlined from "@mui/icons-material/UploadOutlined";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+
 import Swal from "sweetalert2";
 import 'sweetalert2/dist/sweetalert2.css'
 

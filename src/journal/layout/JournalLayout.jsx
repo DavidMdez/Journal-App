@@ -1,4 +1,6 @@
-import { Box, Toolbar } from "@mui/material"
+import Box from "@mui/material/Box";
+import Toolbar from "@mui/material/Toolbar";
+
 import { NavBar, SideBar } from "../components";
 import { useState } from "react";
 

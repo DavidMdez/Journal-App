@@ -1,5 +1,6 @@
-import { EditCalendarOutlined } from "@mui/icons-material"
-import { Grid, Typography } from "@mui/material"
+import EditCalendarOutlined from "@mui/icons-material/EditCalendarOutlined"
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
 
 
 export const NothingSelectedView = () => {

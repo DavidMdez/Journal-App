@@ -1,7 +1,12 @@
 import { useMemo } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { TurnedInNot } from "@mui/icons-material"
-import { Grid, ListItem, ListItemButton, ListItemIcon, ListItemText } from "@mui/material"
+
+import TurnedInNot from "@mui/icons-material/TurnedInNot"
+import Grid from "@mui/material/Grid";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
 
 import { setActiveNote } from "../../store/journal";
 import './styless.css'
